@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  storefront:
+    build:
+      context: ./storefront
+      dockerfile: Dockerfile
+    container_name: storefront
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./storefront:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VIRTUAL_HOST=social-scm.ddns.net
+      - LETSENCRYPT_HOST=social-scm.ddns.net
+      - LETSENCRYPT_EMAIL=your-email@example.com
+    depends_on:
+      - backend
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: admin
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./admin:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VIRTUAL_HOST=social-scm.ddns.net
+      - LETSENCRYPT_HOST=social-scm.ddns.net
+      - LETSENCRYPT_EMAIL=your-email@example.com
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - JWT_SECRET=secret_swu_cci
+      - DB_HOST=db
+      - DB_PORT=5433
+      - DB_USER=admin
+      - DB_PASSWORD=cci_password
+      - DB_NAME=swu
+      - VIRTUAL_HOST=social-scm.ddns.net
+      - LETSENCRYPT_HOST=social-scm.ddns.net
+      - LETSENCRYPT_EMAIL=your-email@example.com
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: cci_password
+      POSTGRES_DB: swu
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: npm run migrate
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=5433
+      - DB_USER=admin
+      - DB_PASSWORD=cci_password
+      - DB_NAME=swu
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

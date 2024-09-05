@@ -1,0 +1,136 @@
+.container {
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.bgTextured {
+  background-image: url('/images/subtle-texture.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bgGradient {
+  background: linear-gradient(135deg, #f7f7f7, #bfa053 70%);
+}
+
+.text-gold {
+  color: #bfa053;
+}
+
+.textDarkGray {
+  color: #333;
+}
+
+.textLightGray {
+  color: #f7f7f7;
+}
+
+.cardHover{
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardHover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  border: 1px solid #f7f7f7;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.card img {
+  height: 250px; 
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* banner */
+.bannerContainer {
+  background-image: url('/api/public/product/27/main/0.png'); /* Use your image */
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem; /* Adjust padding as necessary */
+  border-radius: 1rem;
+  position: relative;
+  text-align: center;
+  color: white;
+  margin-bottom: 80px;
+}
+
+.bannerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bannerTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.bannerSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bannerSearch {
+  position: absolute;
+  bottom: -2rem; /* Adjust based on the desired overlap */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 90%;
+}
+
+.searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px; /* Full round corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.searchField {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.searchField label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.searchField input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.btnPrimary {
+  background-color: #bfa053;
+  color: white;
+  border-radius: 9999px; /* Full round corners */
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #a27d3b;
+}
+
+@media (min-width: 768px) {
+  .bannerSearch {
+    bottom: -3rem; /* Adjust for larger screens */
+  }
+}
+  

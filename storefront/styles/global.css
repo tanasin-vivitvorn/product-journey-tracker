@@ -1,0 +1,128 @@
+/* Example global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+input, select, button {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #333;
+}
+
+button {
+  cursor: pointer;
+
+  &.btn-gold {
+    background-color: #bfa053;
+    color: white;
+    border: none;
+
+    &:hover {
+      background-color: #a38940;
+    }
+  }
+
+  &.btn-outline {
+    background-color: transparent;
+    border: 1px solid #333;
+
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
+}
+
+/* Assuming you're using Tailwind CSS */
+.timeline-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+}
+
+.timeline-content {
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-left .timeline-content {
+  grid-column: 1 / 2;
+}
+
+.timeline-right .timeline-content {
+  grid-column: 3 / 4;
+}
+
+.timeline-point {
+  grid-column: 2 / 3;
+  align-self: center;
+  justify-self: center;
+}
+
+/* Base button styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Primary button */
+.btn-primary {
+  background-color: #bfa053; /* Gold color */
+  color: white;
+  border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+  background-color: #a27d3b; /* Darker gold for hover effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary button */
+.btn-secondary {
+  background-color: #ffffff;
+  color: #333;
+  border: 2px solid #bfa053;
+}
+
+.btn-secondary:hover {
+  background-color: #f7f7f7;
+  color: #bfa053;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Outline button */
+.btn-outline {
+  background-color: transparent;
+  color: #bfa053;
+  border: 2px solid #bfa053;
+}
+
+.btn-outline:hover {
+  background-color: #bfa053;
+  color: white;
+}
+
+/* Additional button styles */
+.btn-full {
+  width: 100%;
+}
+
+.btn-icon {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon svg {
+  margin-right: 0.5rem;
+}
