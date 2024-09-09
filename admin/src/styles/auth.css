@@ -1,0 +1,96 @@
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ff7a00;
+  }
+  
+  .auth-box {
+    display: flex;
+    width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .auth-image {
+    flex: 1;
+    background-image: url('/images/banner1.webp');
+  }
+  
+  
+  .auth-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .auth-form h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff7a00;;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .login-btn:hover {
+    background-color: #357ab8;
+  }
+  
+  .website-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .website-btn:hover {
+    background-color: #1a1a1a;
+  }
+  
+  p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  p a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  

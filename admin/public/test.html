@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Iframe</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7a00;
+      margin-bottom: 20px;
+    }
+
+    #content {
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      transition: height 0.5s ease-out;
+      background-color: #e9ecef;
+      padding: 0 20px;
+      border-radius: 8px;
+    }
+
+    p {
+      margin: 20px 0;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .token-message {
+      padding: 15px;
+      border-left: 5px solid #ff7a00;
+      background-color: #fff3cd;
+      color: #856404;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard Iframe</h1>
+    <div id="content"></div>
+  </div>
+
+  <script>
+    window.addEventListener('message', (event) => {
+      if (event.origin !== 'http://localhost:3000') {
+        // Ignore messages from other origins
+        return;
+      }
+
+      console.log('Received message:', event.data);
+
+      // Example of handling the received message
+      if (event.data.type === 'jwt-token') {
+        const contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = `
+          <div class="token-message">
+            <p><strong>Received JWT Token:</strong> ${event.data.content}</p>
+          </div>
+        `;
+        contentDiv.style.height = 'auto';  // Adjust the height to fit the content
+      }
+    });
+  </script>
+</body>
+</html>
