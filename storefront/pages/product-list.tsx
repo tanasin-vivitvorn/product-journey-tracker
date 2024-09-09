@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { fetchProducts } from '../store/slices/productListSlice';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { Card } from 'flowbite-react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -53,8 +53,11 @@ interface Product {
 
 const ProductList: React.FC = () => {
 
-  const dispatch = useDispatch();
-  const { products, status, error } = useSelector((state: RootState) => state.productList);
+  const useAppDispatch = () => useDispatch<AppDispatch>();
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const dispatch = useAppDispatch();
+  
+  const { products, status, error } = useAppSelector((state: RootState) => state.productList);
 
   useEffect(() => {
     if (status === 'idle') {

@@ -5,10 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Accordion, Timeline, Modal, Button } from 'flowbite-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { useRouter } from 'next/router';
 import { fetchProductDetail } from '../store/slices/productDetailSlice';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { HiCheckCircle } from 'react-icons/hi';
 
 // Import Swiper styles
@@ -26,11 +26,13 @@ const ProductPage: React.FC = () => {
     launch: false,
   });
 
-  const dispatch = useDispatch();
+  const useAppDispatch = () => useDispatch<AppDispatch>();
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { productId } = router.query;
 
-  const { product, status, error } = useSelector((state: RootState) => state.productDetail);
+  const { product, status, error } = useAppSelector((state: RootState) => state.productDetail);
 
   useEffect(() => {
     if (productId && typeof productId === 'string') {
